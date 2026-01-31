@@ -1,16 +1,51 @@
-# React + Vite
+# Guruji – Career Guidance Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Guruji is a **frontend prototype** that helps users explore, compare, and understand career paths before committing to one.  
+It focuses on **experience-based guidance**, **risk awareness**, and **career similarity**, rather than generic career quizzes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- 🎮 **Gamified Career Simulator**  
+  Experience real-world tasks (e.g., Data Analyst scenarios with graphs and decisions).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🧭 **Personalized Career Recommendations**  
+  Career matches based on interests, skills, work style, and simulation feedback.
 
-## Expanding the ESLint configuration
+- 🌐 **Career Similarity Map**  
+  Visual network showing how careers relate to each other through shared skills.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚖️ **Risk & Consequence Awareness**  
+  Shows trade-offs and opportunity costs of choosing one career over another.
+
+- 🔍 **Career Comparison**  
+  Compare any two careers side-by-side across skills, risk, flexibility, and work nature.
+
+- 🧩 **Skill Gap & Roadmaps**  
+  Highlights missing skills and learning paths for each career.
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React + Vite  
+- **Styling:** CSS / Component-based UI  
+- **Logic:** Hardcoded JSON (mock data)  
+- **Backend:** None (frontend-only prototype)
+
+---
+
+## 📌 Project Status
+
+This is a **high-fidelity frontend prototype** built for a hackathon.  
+All data is **mocked** to demonstrate user flow, UI, and feasibility.  
+Backend and real data integration can be added in the future.
+
+---
+
+## ▶️ How to Run Locally
+
+```bash
+npm install
+npm run dev
