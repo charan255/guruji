@@ -148,5 +148,75 @@
             "fame"
         ],
         "id": "5061f4f3-c3e1-4a11-bda0-3de9a0297afe"
+    },
+    {
+        "interests": [
+            "Coding"
+        ],
+        "skills": {
+            "coding": 3,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 3,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "money"
+        ],
+        "id": "0085a5ad-de39-46ec-9994-7435fb5d4247"
+    },
+    {
+        "interests": [
+            "Solving Puzzles",
+            "Coding"
+        ],
+        "skills": {
+            "coding": 3,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 3,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "money"
+        ],
+        "id": "e6ee96b7-910e-4215-affe-ab6709c3e736"
+    },
+    {
+        "interests": [
+            "Coding"
+        ],
+        "skills": {
+            "coding": 3,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 3,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "money"
+        ],
+        "id": "575170d9-e4f1-4eaa-8883-8ed28f4f3a2c"
     }
 ]

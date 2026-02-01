@@ -1,0 +1,75 @@
+[
+    {
+        "career_id": "musician",
+        "scenarios": [
+            {
+                "id": "mus_1",
+                "description": "You are improvising a solo during a live jazz performance. The drummer suddenly shifts the tempo.",
+                "options": [
+                    {
+                        "id": "a",
+                        "text": "Stop playing to listen first.",
+                        "score": 5
+                    },
+                    {
+                        "id": "b",
+                        "text": "Adjust your phrasing to match the new tempo immediately.",
+                        "score": 10
+                    },
+                    {
+                        "id": "c",
+                        "text": "Stick to your original tempo to force them back.",
+                        "score": 2
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "career_id": "actor",
+        "scenarios": [
+            {
+                "id": "act_1",
+                "description": "During a scene, your co-actor forgets their line. The silence is growing awkward.",
+                "options": [
+                    {
+                        "id": "a",
+                        "text": "Improvise a line that prompts their character.",
+                        "score": 10
+                    },
+                    {
+                        "id": "b",
+                        "text": "Wait silently for them to remember.",
+                        "score": 5
+                    },
+                    {
+                        "id": "c",
+                        "text": "Break character and call for line.",
+                        "score": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "career_id": "ux-designer",
+        "scenarios": [
+            {
+                "id": "ux_1",
+                "description": "Users are struggling to find the checkout button.",
+                "options": [
+                    {
+                        "id": "a",
+                        "text": "Make it bigger and red.",
+                        "score": 10
+                    },
+                    {
+                        "id": "b",
+                        "text": "Add a popup tutorial.",
+                        "score": 5
+                    }
+                ]
+            }
+        ]
+    }
+]

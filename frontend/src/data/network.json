@@ -1,0 +1,336 @@
+{
+    "nodes": [
+        {
+            "id": "data-scientist",
+            "label": "Data Scientist",
+            "group": "AI"
+        },
+        {
+            "id": "data-analyst",
+            "label": "Data Analyst",
+            "group": "AI"
+        },
+        {
+            "id": "ux-designer",
+            "label": "UX Designer",
+            "group": "Design"
+        },
+        {
+            "id": "product-manager",
+            "label": "Product Manager",
+            "group": "Product"
+        },
+        {
+            "id": "musician",
+            "label": "Musician",
+            "group": "Arts"
+        },
+        {
+            "id": "backend-dev",
+            "label": "Backend Eng",
+            "group": "CS"
+        },
+        {
+            "id": "systems-eng",
+            "label": "Systems Eng",
+            "group": "CS"
+        },
+        {
+            "id": "devops",
+            "label": "DevOps Eng",
+            "group": "CS"
+        },
+        {
+            "id": "cloud-eng",
+            "label": "Cloud Eng",
+            "group": "CS"
+        },
+        {
+            "id": "sre",
+            "label": "SRE",
+            "group": "CS"
+        },
+        {
+            "id": "fullstack",
+            "label": "Fullstack Dev",
+            "group": "CS"
+        },
+        {
+            "id": "ml-engineer",
+            "label": "ML Engineer",
+            "group": "AI"
+        },
+        {
+            "id": "ai-researcher",
+            "label": "AI Researcher",
+            "group": "AI"
+        },
+        {
+            "id": "data-engineer",
+            "label": "Data Engineer",
+            "group": "AI"
+        },
+        {
+            "id": "applied-scientist",
+            "label": "Applied Scientist",
+            "group": "AI"
+        },
+        {
+            "id": "nlp-engineer",
+            "label": "NLP Engineer",
+            "group": "AI"
+        },
+        {
+            "id": "security-analyst",
+            "label": "Security Analyst",
+            "group": "Security"
+        },
+        {
+            "id": "ethical-hacker",
+            "label": "Ethical Hacker",
+            "group": "Security"
+        },
+        {
+            "id": "security-eng",
+            "label": "Security Eng",
+            "group": "Security"
+        },
+        {
+            "id": "forensics",
+            "label": "Digital Forensics",
+            "group": "Security"
+        },
+        {
+            "id": "soc-analyst",
+            "label": "SOC Analyst",
+            "group": "Security"
+        },
+        {
+            "id": "embedded",
+            "label": "Embedded Sys",
+            "group": "Hardware"
+        },
+        {
+            "id": "robotics",
+            "label": "Robotics Eng",
+            "group": "Hardware"
+        },
+        {
+            "id": "iot-eng",
+            "label": "IoT Engineer",
+            "group": "Hardware"
+        },
+        {
+            "id": "vlsi",
+            "label": "VLSI Engineer",
+            "group": "Hardware"
+        },
+        {
+            "id": "hardware-design",
+            "label": "Hardware Design",
+            "group": "Hardware"
+        },
+        {
+            "id": "research-scientist",
+            "label": "Research Scientist",
+            "group": "Science"
+        },
+        {
+            "id": "comp-physicist",
+            "label": "Comp. Physicist",
+            "group": "Science"
+        },
+        {
+            "id": "bioinfo",
+            "label": "Bioinformatician",
+            "group": "Science"
+        },
+        {
+            "id": "chemist",
+            "label": "Comp. Chemist",
+            "group": "Science"
+        },
+        {
+            "id": "climate",
+            "label": "Climate Scientist",
+            "group": "Science"
+        },
+        {
+            "id": "mech-design",
+            "label": "Mech Design",
+            "group": "EngTech"
+        },
+        {
+            "id": "mechatronics",
+            "label": "Mechatronics",
+            "group": "EngTech"
+        },
+        {
+            "id": "auto-soft",
+            "label": "Automotive Soft",
+            "group": "EngTech"
+        },
+        {
+            "id": "aerospace",
+            "label": "Aerospace Eng",
+            "group": "EngTech"
+        }
+    ],
+    "links": [
+        {
+            "source": "backend-dev",
+            "target": "systems-eng",
+            "value": 8
+        },
+        {
+            "source": "backend-dev",
+            "target": "devops",
+            "value": 7
+        },
+        {
+            "source": "devops",
+            "target": "cloud-eng",
+            "value": 9
+        },
+        {
+            "source": "cloud-eng",
+            "target": "sre",
+            "value": 8
+        },
+        {
+            "source": "sre",
+            "target": "systems-eng",
+            "value": 7
+        },
+        {
+            "source": "fullstack",
+            "target": "backend-dev",
+            "value": 6
+        },
+        {
+            "source": "data-scientist",
+            "target": "ml-engineer",
+            "value": 9
+        },
+        {
+            "source": "ml-engineer",
+            "target": "ai-researcher",
+            "value": 8
+        },
+        {
+            "source": "ml-engineer",
+            "target": "nlp-engineer",
+            "value": 8
+        },
+        {
+            "source": "ai-researcher",
+            "target": "applied-scientist",
+            "value": 7
+        },
+        {
+            "source": "data-scientist",
+            "target": "data-analyst",
+            "value": 6
+        },
+        {
+            "source": "data-engineer",
+            "target": "data-scientist",
+            "value": 7
+        },
+        {
+            "source": "data-engineer",
+            "target": "backend-dev",
+            "value": 5
+        },
+        {
+            "source": "security-analyst",
+            "target": "soc-analyst",
+            "value": 8
+        },
+        {
+            "source": "security-eng",
+            "target": "ethical-hacker",
+            "value": 7
+        },
+        {
+            "source": "ethical-hacker",
+            "target": "forensics",
+            "value": 6
+        },
+        {
+            "source": "security-eng",
+            "target": "devops",
+            "value": 4
+        },
+        {
+            "source": "security-eng",
+            "target": "backend-dev",
+            "value": 3
+        },
+        {
+            "source": "embedded",
+            "target": "iot-eng",
+            "value": 9
+        },
+        {
+            "source": "embedded",
+            "target": "robotics",
+            "value": 7
+        },
+        {
+            "source": "robotics",
+            "target": "mechatronics",
+            "value": 8
+        },
+        {
+            "source": "vlsi",
+            "target": "hardware-design",
+            "value": 8
+        },
+        {
+            "source": "hardware-design",
+            "target": "embedded",
+            "value": 6
+        },
+        {
+            "source": "comp-physicist",
+            "target": "research-scientist",
+            "value": 7
+        },
+        {
+            "source": "bioinfo",
+            "target": "data-scientist",
+            "value": 5
+        },
+        {
+            "source": "chemist",
+            "target": "research-scientist",
+            "value": 6
+        },
+        {
+            "source": "climate",
+            "target": "data-analyst",
+            "value": 4
+        },
+        {
+            "source": "mech-design",
+            "target": "aerospace",
+            "value": 7
+        },
+        {
+            "source": "mechatronics",
+            "target": "auto-soft",
+            "value": 8
+        },
+        {
+            "source": "auto-soft",
+            "target": "embedded",
+            "value": 6
+        },
+        {
+            "source": "aerospace",
+            "target": "systems-eng",
+            "value": 4
+        }
+    ]
+}

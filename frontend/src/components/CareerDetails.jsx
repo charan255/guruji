@@ -6,13 +6,7 @@ const CareerDetails = ({ career, onBack, onSimulate }) => {
 
     return (
         <div className="container animate-fade-in" style={{ paddingBottom: '4rem' }}>
-            <button
-                onClick={onBack}
-                className="btn-secondary"
-                style={{ width: 'fit-content', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-            >
-                <ArrowLeft size={18} /> Back to Matches
-            </button>
+
 
             {/* Header Section */}
             <header className="glass-card" style={{ marginBottom: '2rem' }}>
@@ -30,12 +24,21 @@ const CareerDetails = ({ career, onBack, onSimulate }) => {
                             <Play size={20} /> Simulate This Role
                         </button>
                     </div>
-                    <div style={{ textAlign: 'right', background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '1rem', minWidth: '200px' }}>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Est. Salary</div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4ade80' }}>{career.salary}</div>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>Growth</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                            <TrendingUp size={16} /> {career.growth}
+                    <div style={{ textAlign: 'right', background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '1rem', minWidth: '220px' }}>
+                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Salary Range</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold', color: '#4ade80' }}>{career.salary}</div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
+                            <div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Growth</div>
+                                <div style={{ fontSize: '1.1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                                    <TrendingUp size={14} /> {career.growth}
+                                </div>
+                            </div>
+                            <div style={{ textAlign: 'right' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Demand</div>
+                                <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--accent)' }}>{career.marketDemand || 'High'}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,11 +49,11 @@ const CareerDetails = ({ career, onBack, onSimulate }) => {
                 {/* Left Column: Data & Roadmap */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
-                    {/* Gains vs Trade-offs */}
+                    {/* Strengths vs Trade-offs */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div className="glass-card" style={{ borderColor: 'rgba(74, 222, 128, 0.3)', background: 'rgba(74, 222, 128, 0.05)' }}>
                             <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#4ade80' }}>
-                                <CheckCircle size={20} /> What you Gain
+                                <CheckCircle size={20} /> Key Strengths
                             </h3>
                             <ul style={{ paddingLeft: '1.2rem', fontSize: '0.95rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 {career.gains?.map((g, i) => <li key={i}>{g}</li>)}
@@ -150,7 +153,14 @@ const CareerDetails = ({ career, onBack, onSimulate }) => {
                         <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--accent)' }}>
                             <AlertCircle size={20} /> Reality Check
                         </h3>
-                        <p style={{ opacity: 0.9, lineHeight: '1.6' }}>{career.risk}</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                            <span style={{ opacity: 0.7 }}>Risk Level:</span>
+                            <span style={{ fontWeight: 'bold' }}>{career.risk}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ opacity: 0.7 }}>Lifestyle:</span>
+                            <span style={{ fontWeight: 'bold' }}>{career.lifestyle || 'Varied'}</span>
+                        </div>
                     </div>
 
                     <div className="glass-card">

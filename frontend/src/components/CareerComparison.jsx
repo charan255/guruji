@@ -32,28 +32,27 @@ const CareerComparison = ({ onBack }) => {
     if (loading || !careerA || !careerB) return <div className="container" style={{ textAlign: 'center', paddingTop: '4rem' }}>Loading comparison...</div>;
 
     const attributes = [
-        { label: 'Salary Range', key: 'salary' },
-        { label: 'Growth', key: 'growth' },
-        { label: 'Risk Factor', key: 'risk' }
+        { label: 'Domain', key: 'domain' },
+        { label: 'Salary Range', key: 'salaryRange' },
+        { label: 'Growth', key: 'growthRate' },
+        { label: 'Risk Factor', key: 'riskLevel' },
+        { label: 'Learning Curve', key: 'learningCurve' },
+        { label: 'Lifestyle', key: 'lifestyle' },
+        { label: 'Automation Risk', key: 'automationRisk' },
+        { label: 'Work Nature', key: 'workNature' }, // New field from prompt
+        { label: 'Long Term Outlook', key: 'longTermOutlook' } // New field from prompt
     ];
 
     const getValue = (career, key) => {
+        // Handle array or object values if necessary, strictly for strings here mostly
         return career[key] || '-';
     };
 
     // ... (lines 50-136 omitted)
 
-
-
     return (
         <div className="container animate-fade-in" style={{ paddingBottom: '4rem' }}>
-            <button
-                onClick={onBack}
-                className="btn-secondary"
-                style={{ width: 'fit-content', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-            >
-                <ArrowLeft size={18} /> Back to Matches
-            </button>
+
 
             <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
@@ -132,7 +131,7 @@ const CareerComparison = ({ onBack }) => {
                     </div>
                 ))}
 
-                {/* Skills Row */}
+                {/* Skills Row - using coreSkills from new schema */}
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr',
@@ -141,13 +140,17 @@ const CareerComparison = ({ onBack }) => {
                 }}>
                     <div style={{ opacity: 0.7 }}>Core Skills</div>
                     <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
-                        {careerA.skills?.slice(0, 3).map(s => (
-                            <span key={s.name || s} className="badge" style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#c4b5fd' }}>{s.name || s}</span>
+                        {(careerA.coreSkills || careerA.skills || []).slice(0, 3).map((s, i) => (
+                            <span key={i} className="badge" style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#c4b5fd' }}>
+                                {typeof s === 'string' ? s : s.name}
+                            </span>
                         ))}
                     </div>
                     <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
-                        {careerB.skills?.slice(0, 3).map(s => (
-                            <span key={s.name || s} className="badge" style={{ background: 'rgba(244, 63, 94, 0.1)', color: '#fda4af' }}>{s.name || s}</span>
+                        {(careerB.coreSkills || careerB.skills || []).slice(0, 3).map((s, i) => (
+                            <span key={i} className="badge" style={{ background: 'rgba(244, 63, 94, 0.1)', color: '#fda4af' }}>
+                                {typeof s === 'string' ? s : s.name}
+                            </span>
                         ))}
                     </div>
                 </div>

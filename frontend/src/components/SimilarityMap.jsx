@@ -5,98 +5,119 @@ const SimilarityMap = () => {
     const [networkData, setNetworkData] = useState({ nodes: [], links: [] });
     const [loading, setLoading] = useState(true);
     const [hoveredNode, setHoveredNode] = useState(null);
-    const [selectedNode, setSelectedNode] = useState(null);
     const containerRef = useRef(null);
 
-    const centerPos = { x: 400, y: 350 };
+    // Center of the canvas
+    const cx = 500;
+    const cy = 400;
 
-    // Group Anchors (Fixed positions for clusters)
-    const anchors = {
-        'Arts': { x: 400, y: 150, color: '#a855f7', label: 'Creative & Arts' },
-        'Eng': { x: 650, y: 300, color: '#10b981', label: 'Tech & Eng' },
-        'Data': { x: 650, y: 300, color: '#3b82f6', label: 'Tech & Eng' }, // Grouped with Eng
-        'Design': { x: 550, y: 550, color: '#f43f5e', label: 'Design' },
-        'Product': { x: 250, y: 550, color: '#fbbf24', label: 'Product & Business' },
-        'Business': { x: 250, y: 550, color: '#fbbf24', label: 'Product & Business' }, // Grouped
-        'user': { x: 400, y: 350, color: '#ffffff', label: 'You' }
+    // Domain Sectors (Angles in Degrees)
+    // Allocating sectors to separate genres clearly
+    const sectors = {
+        'AI': { start: 270, end: 330, color: '#3b82f6', label: 'AI & Data' },    // Top-Right
+        'CS': { start: 330, end: 30, color: '#10b981', label: 'Core CS' },      // Right
+        'Security': { start: 30, end: 70, color: '#ef4444', label: 'Security' }, // Bottom-Right
+
+        'Hardware': { start: 70, end: 110, color: '#f97316', label: 'Electronics' }, // Bottom
+        'EngTech': { start: 110, end: 150, color: '#8b5cf6', label: 'Engineering' },
+        'Eng': { start: 110, end: 150, color: '#8b5cf6', label: 'Eng' },
+
+        'Science': { start: 150, end: 210, color: '#06b6d4', label: 'Science' }, // Bottom-Left
+        'Design': { start: 210, end: 240, color: '#f43f5e', label: 'Design' },   // Left
+        'Product': { start: 240, end: 270, color: '#fbbf24', label: 'Product' }, // Top-Left
+
+        'Arts': { start: 240, end: 300, color: '#ec4899', label: 'Creative Arts' }, // Overlap top
+        'user': { start: 0, end: 360, color: '#ffffff', label: 'You' }
     };
 
     useEffect(() => {
         api.getNetwork().then(data => {
-            // 1. Initialize Nodes with Anchor Positions + Jitter
+            // 1. Initialize Nodes
             let nodes = data.nodes.map(node => {
-                const anchor = anchors[node.group] || { x: 400, y: 350 };
+                const sector = sectors[node.group] || sectors['CS'];
+                const midAngle = (sector.start + sector.end) / 2;
+                const angleRad = (midAngle * Math.PI) / 180;
+
+                // Distance based on "un-match" (Higher match = closer)
+                // Match 100 -> dist 0. Match 40 -> dist ~360.
+                const targetDist = (100 - (node.match || 50)) * 6;
+
                 return {
                     ...node,
-                    x: anchor.x + (Math.random() * 80 - 40),
-                    y: anchor.y + (Math.random() * 80 - 40),
-                    radius: node.id === 'user' ? 45 : 30, // Visual radius
+                    // Initial position with some jitter around target sector
+                    x: cx + Math.cos(angleRad) * targetDist + (Math.random() * 40 - 20),
+                    y: cy + Math.sin(angleRad) * targetDist + (Math.random() * 40 - 20),
+                    radius: node.id === 'user' ? 25 : 8 + (node.match / 10), // Size by relevance
+                    targetDist: targetDist,
+                    angle: angleRad,
                     vx: 0,
                     vy: 0
                 };
             });
 
-            // Add user node if not present
+            // Add User center
             if (!nodes.find(n => n.id === 'user')) {
-                nodes.push({ id: 'user', label: 'You', group: 'user', x: 400, y: 350, radius: 45, vx: 0, vy: 0 });
+                nodes.push({ id: 'user', label: 'You', group: 'user', x: cx, y: cy, radius: 40, match: 100, targetDist: 0, vx: 0, vy: 0 });
             }
 
-            // 2. Simple Force Simulation (Run for fixed iterations to stabilize)
-            for (let i = 0; i < 150; i++) {
+            // 2. Specialized Radial Force Simulation
+            for (let i = 0; i < 200; i++) {
                 nodes.forEach(node => {
-                    if (node.id === 'user') return; // User is fixed
+                    if (node.id === 'user') {
+                        node.x = cx;
+                        node.y = cy;
+                        return;
+                    }
 
-                    // Attraction to Anchor
-                    const anchor = anchors[node.group] || anchors['user'];
-                    const dx = anchor.x - node.x;
-                    const dy = anchor.y - node.y;
-                    node.vx += dx * 0.01;
-                    node.vy += dy * 0.01;
+                    // Force 1: Pull to Target Radius (Orbit)
+                    const dx = node.x - cx;
+                    const dy = node.y - cy;
+                    const currentDist = Math.sqrt(dx * dx + dy * dy) || 1;
+                    const distDiff = currentDist - node.targetDist;
 
-                    // Repulsion from other nodes
+                    // Pull towards ring
+                    const pullStrength = 0.05;
+                    node.vx -= (dx / currentDist) * distDiff * pullStrength;
+                    node.vy -= (dy / currentDist) * distDiff * pullStrength;
+
+                    // Force 2: Pull to Sector Angle
+                    const targetAngle = node.angle;
+                    const currentAngle = Math.atan2(dy, dx);
+                    // Simple angular correction is complex, so we just pull slightly towards ideal sector coords
+                    const idealX = cx + Math.cos(targetAngle) * node.targetDist;
+                    const idealY = cy + Math.sin(targetAngle) * node.targetDist;
+                    node.vx += (idealX - node.x) * 0.02;
+                    node.vy += (idealY - node.y) * 0.02;
+
+                    // Force 3: Collision Repulsion
                     nodes.forEach(other => {
                         if (node.id === other.id) return;
                         const rx = node.x - other.x;
                         const ry = node.y - other.y;
                         const dist = Math.sqrt(rx * rx + ry * ry) || 1;
-                        const minDist = node.radius + other.radius + 20; // Padding
+                        const minDist = node.radius + other.radius + 15; // Spacing
 
                         if (dist < minDist) {
-                            const force = (minDist - dist) / dist * 0.5; // Strong repulsion inside padding
+                            const force = (minDist - dist) / dist * 0.2;
                             node.vx += rx * force;
                             node.vy += ry * force;
                         }
                     });
                 });
 
-                // Apply velocity and damping
+                // Update
                 nodes.forEach(node => {
-                    if (node.id === 'user') return;
                     node.x += node.vx;
                     node.y += node.vy;
-                    node.vx *= 0.8; // Friction
-                    node.vy *= 0.8;
+                    node.vx *= 0.85; // Damping
+                    node.vy *= 0.85;
                 });
             }
 
-            // 3. Process Links (Add User Links)
-            const userConnections = [
-                { id: 'ux', match: 0.92 },
-                { id: 'pm', match: 0.78 },
-                { id: 'da', match: 0.65 },
-                { id: 'mus', match: 0.60 } // Example Arts connection
-            ];
-
-            const rawLinks = [
-                ...data.links,
-                ...userConnections.map(c => ({ source: 'user', target: c.id, value: c.match * 10, isUser: true }))
-            ];
-
-            const links = rawLinks.map(link => ({
+            const links = data.links.map(link => ({
                 source: nodes.find(n => n.id === link.source),
                 target: nodes.find(n => n.id === link.target),
-                value: link.value,
-                isUser: link.isUser
+                value: link.value
             })).filter(l => l.source && l.target);
 
             setNetworkData({ nodes, links });
@@ -104,15 +125,7 @@ const SimilarityMap = () => {
         });
     }, []);
 
-    // Helper to draw curved bezier paths (Unused currently but kept for ref)
-    const getPath = (source, target) => {
-        const mx = (source.x + target.x) / 2;
-        const my = (source.y + target.y) / 2;
-        const offset = 30;
-        return `M${source.x},${source.y} Q${mx},${my - offset} ${target.x},${target.y}`;
-    };
-
-    if (loading) return <div className="glass-card" style={{ height: '800px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Building Career Ecosystem...</div>;
+    if (loading) return <div className="glass-card" style={{ height: '800px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Map Loading...</div>;
 
     return (
         <div ref={containerRef} className="glass-card animate-fade-in" style={{
@@ -122,75 +135,55 @@ const SimilarityMap = () => {
             height: '800px',
             margin: '0 auto',
             overflow: 'hidden',
-            background: 'radial-gradient(circle at center, #1e293b 0%, #0f172a 100%)',
+            background: '#0f172a',
             border: '1px solid rgba(255,255,255,0.05)',
             boxShadow: 'inset 0 0 100px rgba(0,0,0,0.5)'
         }}>
-            <h3 style={{ position: 'absolute', top: '1rem', left: '2rem', zIndex: 10, fontSize: '1.5rem', margin: 0 }}>Career Ecosystem</h3>
-            <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -80px)', color: 'white', opacity: 0.5, fontSize: '0.8rem', pointerEvents: 'none', zIndex: 5 }}>Your Match Profile</span>
+            {/* Header + Legend */}
+            <div style={{ position: 'absolute', top: '2rem', left: '2rem', zIndex: 10, pointerEvents: 'none' }}>
+                <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Career Galaxy</h3>
+                <p style={{ margin: 0, opacity: 0.6, fontSize: '0.9rem' }}>Radius = Transition Difficulty</p>
 
-            {/* Legend Labels for Anchors */}
-            {['Arts', 'Eng', 'Design', 'Product'].map(k => (
-                <div key={k} style={{
-                    position: 'absolute',
-                    left: anchors[k].x,
-                    top: anchors[k].y - 80,
-                    transform: 'translateX(-50%)',
-                    color: anchors[k].color,
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                    fontSize: '0.8rem',
-                    letterSpacing: '1px',
-                    opacity: 0.8,
-                    pointerEvents: 'none'
-                }}>
-                    {anchors[k].label}
+                <div style={{ marginTop: '1.5rem', display: 'grid', gap: '0.5rem' }}>
+                    {Object.entries(sectors).filter(([k]) => ['CS', 'AI', 'Security', 'Hardware', 'Science'].includes(k)).map(([key, s]) => (
+                        <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem' }}>
+                            <div style={{ width: 8, height: 8, borderRadius: '50%', background: s.color }}></div>
+                            <span style={{ opacity: 0.8 }}>{s.label}</span>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
 
-            <svg style={{ width: '100%', height: '100%', cursor: 'grab' }}>
+            <svg style={{ width: '100%', height: '100%' }}>
                 <defs>
-                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                        <feMerge>
-                            <feMergeNode in="coloredBlur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
+                    <radialGradient id="centerGlow" cx="0.5" cy="0.5" r="0.5">
+                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.15" />
+                        <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
+                    </radialGradient>
                 </defs>
 
-                {/* Connections */}
+                {/* Concentric Rings (Guidelines) */}
+                <circle cx={cx} cy={cy} r={150} fill="none" stroke="white" strokeOpacity="0.03" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx={cx} cy={cy} r={280} fill="none" stroke="white" strokeOpacity="0.03" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx={cx} cy={cy} r={400} fill="none" stroke="white" strokeOpacity="0.02" strokeWidth="1" />
+
+                {/* Center Glow */}
+                <circle cx={cx} cy={cy} r={200} fill="url(#centerGlow)" style={{ pointerEvents: 'none' }} />
+
+                {/* Links (Subtle by default) */}
                 {networkData.links.map((link, i) => {
                     const isHovered = hoveredNode && (hoveredNode.id === link.source.id || hoveredNode.id === link.target.id);
-                    const isStrong = link.value > 3;
-                    const isUserLink = link.isUser;
-
-                    // Determine stroke color
-                    let strokeColor = anchors[link.source.group]?.color || '#ffffff';
-                    if (isUserLink) strokeColor = '#facc15'; // Gold for user links
-                    if (isHovered) strokeColor = 'white';
-
-                    // Determine width and opacity
-                    let width = isStrong ? 1.5 : 0.5;
-                    let opacity = isStrong ? 0.3 : 0.1;
-
-                    if (isUserLink) {
-                        width = link.value * 0.3; // Map 6-10 match score to px width
-                        opacity = link.value * 0.08; // Higher opacity
-                    }
-                    if (isHovered) {
-                        width = 3;
-                        opacity = 0.9;
-                    }
+                    // Hide lines unless hovered or part of active cluster
+                    const opacity = isHovered ? 0.6 : 0.05;
 
                     return (
-                        <path
+                        <line
                             key={i}
-                            d={`M${link.source.x},${link.source.y} L${link.target.x},${link.target.y}`} // Straight lines are cleaner for clusters
-                            stroke={strokeColor}
-                            strokeWidth={width}
+                            x1={link.source.x} y1={link.source.y}
+                            x2={link.target.x} y2={link.target.y}
+                            stroke={sectors[link.source.group]?.color || '#555'}
                             strokeOpacity={opacity}
-                            fill="none"
+                            strokeWidth={isHovered ? 1.5 : 0.5}
                             style={{ transition: 'all 0.3s' }}
                         />
                     );
@@ -200,11 +193,7 @@ const SimilarityMap = () => {
                 {networkData.nodes.map(node => {
                     const isUser = node.id === 'user';
                     const isHovered = hoveredNode?.id === node.id;
-                    const isConnected = hoveredNode && networkData.links.some(l =>
-                        (l.source.id === hoveredNode.id && l.target.id === node.id) ||
-                        (l.target.id === hoveredNode.id && l.source.id === node.id)
-                    );
-                    const anchorColor = anchors[node.group]?.color || '#fff';
+                    const color = isUser ? '#fff' : (sectors[node.group]?.color || '#888');
 
                     return (
                         <g
@@ -212,62 +201,80 @@ const SimilarityMap = () => {
                             transform={`translate(${node.x},${node.y})`}
                             onMouseEnter={() => setHoveredNode(node)}
                             onMouseLeave={() => setHoveredNode(null)}
-                            onClick={() => setSelectedNode(node)}
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: 'pointer', transition: 'opacity 0.3s' }}
+                            opacity={hoveredNode && !isHovered && !isUser ? 0.2 : 1}
                         >
-                            {/* Glow Effect */}
-                            {(isHovered || isUser) && (
-                                <circle r={node.radius + 10} fill={anchorColor} opacity="0.15" />
-                            )}
-
-                            {/* Node Circle */}
+                            {/* Node Dot */}
                             <circle
-                                r={node.radius}
-                                fill={isUser ? '#ffffff' : '#1e293b'}
-                                stroke={anchorColor}
-                                strokeWidth={isUser || isHovered ? 4 : 2}
-                                filter={isUser ? "url(#glow)" : ""}
+                                r={isUser ? 30 : (node.radius * 0.8)} // Slightly smaller nodes 
+                                fill={isUser ? 'white' : '#0f172a'}
+                                stroke={color}
+                                strokeWidth={isUser ? 0 : 2}
                             />
+                            {/* Inner fill */}
+                            {!isUser && <circle r={(node.radius * 0.8) - 4} fill={color} opacity="0.4" />}
 
-                            {/* Label inside node */}
-                            <text
-                                dy={isUser ? 5 : 4}
-                                textAnchor="middle"
-                                fill="white"
-                                fontSize={isUser ? "0.9rem" : "0.7rem"}
-                                fontWeight={isUser ? "bold" : "normal"}
-                                style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}
-                            >
-                                {isUser ? "YOU" : node.label.split(' ')[0]}
-                            </text>
+                            {/* Label: ONLY for YOU */}
+                            {isUser && (
+                                <text
+                                    dy={5}
+                                    textAnchor="middle"
+                                    fill="#0f172a"
+                                    fontSize={12}
+                                    fontWeight="bold"
+                                    style={{ pointerEvents: 'none' }}
+                                >
+                                    YOU
+                                </text>
+                            )}
                         </g>
                     );
                 })}
             </svg>
 
-            {/* Hover Tooltip */}
-            {hoveredNode && (
+            {/* Enhanced Tooltip */}
+            {hoveredNode && hoveredNode.id !== 'user' && (
                 <div style={{
                     position: 'absolute',
-                    top: hoveredNode.y + 40,
-                    left: hoveredNode.x,
-                    transform: 'translateX(-50%)',
+                    top: hoveredNode.y - 20,
+                    left: hoveredNode.x + 20,
                     background: 'rgba(15, 23, 42, 0.95)',
                     padding: '1rem',
                     borderRadius: '0.75rem',
-                    border: `1px solid ${anchors[hoveredNode.group]?.color}`,
+                    borderLeft: `4px solid ${sectors[hoveredNode.group]?.color || '#fff'}`,
                     zIndex: 20,
+                    width: 'max-content',
+                    boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.8)',
+                    backdropFilter: 'blur(8px)',
                     pointerEvents: 'none',
-                    minWidth: '200px',
-                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)'
+                    transform: 'translate(10px, -50%)' // Generic offset
                 }}>
-                    <h4 style={{ margin: 0, color: 'white', fontSize: '1.1rem' }}>{hoveredNode.label}</h4>
-                    <span className="badge" style={{ marginTop: '0.5rem', background: 'rgba(255,255,255,0.1)' }}>{anchors[hoveredNode.group]?.label || "User Profile"}</span>
-                    {hoveredNode.id !== 'user' && (
-                        <p style={{ fontSize: '0.8rem', color: '#94a3b8', margin: '0.5rem 0' }}>
-                            Click to see transition details.
-                        </p>
-                    )}
+                    <h4 style={{ margin: 0, color: 'white', fontSize: '1.1rem', fontWeight: '600' }}>{hoveredNode.label}</h4>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem', color: '#94a3b8', fontSize: '0.85rem' }}>
+                        <span style={{
+                            background: `${sectors[hoveredNode.group]?.color}20`,
+                            color: sectors[hoveredNode.group]?.color,
+                            padding: '2px 8px', borderRadius: '4px'
+                        }}>
+                            {sectors[hoveredNode.group]?.label}
+                        </span>
+
+                        <span>•</span>
+
+                        <span>
+                            {hoveredNode.match > 80 ? 'Achievable' : hoveredNode.match > 60 ? 'Stretch' : 'Long-term'}
+                        </span>
+                    </div>
+
+                    <div style={{ marginTop: '0.8rem', height: '4px', width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }}>
+                        <div style={{
+                            width: `${hoveredNode.match}%`,
+                            height: '100%',
+                            background: sectors[hoveredNode.group]?.color,
+                            borderRadius: '2px'
+                        }}></div>
+                    </div>
                 </div>
             )}
         </div>

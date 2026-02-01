@@ -16,15 +16,18 @@ const Recommendations = ({ userProfile, onSelectCareer, onSimulate, onCompare })
                     ...item.career,
                     match: item.score,
                     reasoning: item.reasoning,
-                    salary: item.career.salary_range,
-                    growth: item.career.growth_rate,
-                    tradeOffs: item.career.tradeoffs || item.career.tradeOffs,
-                    skills: item.career.skills.map(s => typeof s === 'string' ? { name: s, level: 75 } : s),
+                    salary: item.career.salaryRange,
+                    growth: item.career.growthRate,
+                    tradeOffs: item.career.tradeOffs,
+                    gains: item.career.strengthsRequired, // Map strengths to gains for UI
+                    skills: (item.career.coreSkills || []).map(s => typeof s === 'string' ? { name: s, level: Math.floor(Math.random() * 15) + 70 } : s),
                     roadmap: item.career.roadmap || [],
                     opportunityCost: item.career.opportunityCost || { description: '', retained: [], faded: [] },
-                    risk: typeof item.career.risk === 'object' ? Object.values(item.career.risk).join('. ') : item.career.risk,
+                    risk: item.career.riskLevel,
+                    marketDemand: item.career.marketDemand,
+                    lifestyle: item.career.lifestyle,
                     tags: item.career.tags || [],
-                    category: "Recommended"
+                    category: item.career.domain || "Recommended"
                 }));
                 setCareers(mapped);
             } catch (err) {
