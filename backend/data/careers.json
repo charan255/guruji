@@ -1,0 +1,632 @@
+[
+    {
+        "id": "data-analyst",
+        "title": "Data Analyst",
+        "category": "Data",
+        "salary_range": "$65k - $110k",
+        "growth_rate": "+23%",
+        "description": "Interpret complex data sets to help companies make better business decisions.",
+        "reasoning": "Matches your interest in patterns and logic.",
+        "skills": [
+            "Data Analysis",
+            "SQL",
+            "Statistics",
+            "Data Visualization"
+        ],
+        "related": [
+            "Business Analyst",
+            "Data Scientist",
+            "Operations Analyst"
+        ],
+        "roadmap": [
+            {
+                "action": "Learn Excel & SQL",
+                "timeline": "1-2 months"
+            },
+            {
+                "action": "Master Tableau",
+                "timeline": "1 month"
+            },
+            {
+                "action": "Python",
+                "timeline": "2 months"
+            }
+        ],
+        "risk_factors": {
+            "automation": "Moderate",
+            "competition": "High"
+        },
+        "tradeoffs": [
+            "Repetitive data cleaning",
+            "Sedentary work"
+        ],
+        "opportunity_cost": {
+            "description": "Builds strong fundamentals for Data Science.",
+            "gained_options": [
+                "Data Science",
+                "Business Ops"
+            ],
+            "lost_options": [
+                "Graphic Design",
+                "Frontend Dev"
+            ]
+        },
+        "tags": [
+            "Data",
+            "Logic",
+            "Business"
+        ]
+    },
+    {
+        "id": "data-scientist",
+        "title": "Data Scientist",
+        "category": "Data",
+        "salary_range": "$100k - $160k",
+        "growth_rate": "+22%",
+        "description": "Extract insights from complex data using ML and advanced statistics.",
+        "reasoning": "Requires deep mathematical and coding skills.",
+        "skills": [
+            "Python",
+            "Machine Learning Basics",
+            "Statistics",
+            "Problem Solving"
+        ],
+        "related": [
+            "ML Engineer",
+            "Research Analyst"
+        ],
+        "roadmap": [
+            {
+                "action": "Master Python & Math",
+                "timeline": "3 months"
+            },
+            {
+                "action": "Learn ML Algorithms",
+                "timeline": "3 months"
+            },
+            {
+                "action": "Real-world Projects",
+                "timeline": "Ongoing"
+            }
+        ],
+        "risk_factors": {
+            "automation": "Low",
+            "competition": "Moderate"
+        },
+        "tradeoffs": [
+            "Use of complex math",
+            "Constant study required"
+        ],
+        "opportunity_cost": {
+            "description": "Specialized path that pays well but requires heavy academic focus.",
+            "gained_options": [
+                "AI Research",
+                "Backend Eng"
+            ],
+            "lost_options": [
+                "Sales",
+                "Marketing"
+            ]
+        },
+        "tags": [
+            "AI",
+            "Math",
+            "Coding"
+        ]
+    },
+    {
+        "id": "ux-designer",
+        "title": "UX Designer",
+        "category": "Design",
+        "salary_range": "$85k - $130k",
+        "growth_rate": "+15%",
+        "description": "Design intuitive and accessible user experiences for digital products.",
+        "reasoning": "Perfect for empathetic problem solvers who love design.",
+        "skills": [
+            "UX Research",
+            "UI Design",
+            "Prototyping",
+            "Design Thinking"
+        ],
+        "related": [
+            "Product Designer",
+            "UI Designer"
+        ],
+        "roadmap": [
+            {
+                "action": "Learn Design Principles",
+                "timeline": "1 month"
+            },
+            {
+                "action": "Master Figma",
+                "timeline": "1 month"
+            },
+            {
+                "action": "Build Case Studies",
+                "timeline": "2 months"
+            }
+        ],
+        "risk_factors": {
+            "automation": "Low",
+            "subjectivity": "High"
+        },
+        "tradeoffs": [
+            "Subjective critiques",
+            "Less coding"
+        ],
+        "opportunity_cost": {
+            "description": "Great balance of psych/art.",
+            "gained_options": [
+                "Product Mgmt",
+                "Frontend Dev"
+            ],
+            "lost_options": [
+                "Backend Dev",
+                "Finance"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Empathy",
+            "Tech"
+        ]
+    },
+    {
+        "id": "frontend-developer",
+        "title": "Frontend Developer",
+        "category": "Engineering",
+        "salary_range": "$70k - $125k",
+        "growth_rate": "+15%",
+        "description": "Build the visible parts of websites and applications using code.",
+        "reasoning": "Combines visual logic with technical implementation.",
+        "skills": [
+            "Frontend Development",
+            "APIs & Integration",
+            "Debugging",
+            "UI Design"
+        ],
+        "related": [
+            "UI Engineer",
+            "Fullstack Developer"
+        ],
+        "roadmap": [
+            {
+                "action": "HTML/CSS/JS",
+                "timeline": "2 months"
+            },
+            {
+                "action": "React/Vue",
+                "timeline": "2 months"
+            },
+            {
+                "action": "Build Projects",
+                "timeline": "Ongoing"
+            }
+        ],
+        "risk_factors": {
+            "obsolescence": "High",
+            "complexity": "Medium"
+        },
+        "tradeoffs": [
+            "Constant learning",
+            "Browser bugs"
+        ],
+        "opportunity_cost": {
+            "description": "Solid entry into tech.",
+            "gained_options": [
+                "Fullstack",
+                "UX Eng"
+            ],
+            "lost_options": [
+                "Data Analysis",
+                "Sales"
+            ]
+        },
+        "tags": [
+            "Coding",
+            "Visual",
+            "Logic"
+        ]
+    },
+    {
+        "id": "product-manager",
+        "title": "Product Manager",
+        "category": "Product",
+        "salary_range": "$95k - $150k",
+        "growth_rate": "+10%",
+        "description": "Bridge the gap between business, design, and technology.",
+        "reasoning": "Strategic role for leaders who can prioritize.",
+        "skills": [
+            "Product Strategy",
+            "Communication",
+            "Market Research",
+            "Stakeholder Communication"
+        ],
+        "related": [
+            "Business Analyst",
+            "Growth PM"
+        ],
+        "roadmap": [
+            {
+                "action": "Learn Agile",
+                "timeline": "1 month"
+            },
+            {
+                "action": "Data for PMs",
+                "timeline": "1 month"
+            },
+            {
+                "action": "Launch Side Project",
+                "timeline": "3 months"
+            }
+        ],
+        "risk_factors": {
+            "stress": "High",
+            "politics": "High"
+        },
+        "tradeoffs": [
+            "Lots of meetings",
+            "Context switching"
+        ],
+        "opportunity_cost": {
+            "description": "Leadership path.",
+            "gained_options": [
+                "Founder",
+                "Consulting"
+            ],
+            "lost_options": [
+                "Senior Engineer",
+                "Specialist Designer"
+            ]
+        },
+        "tags": [
+            "Leadership",
+            "Strategy",
+            "People"
+        ]
+    },
+    {
+        "id": "musician",
+        "title": "Musician",
+        "category": "Arts",
+        "salary_range": "$30k - $100k+",
+        "growth_rate": "Variable",
+        "description": "Create and perform music across various genres and instruments.",
+        "reasoning": "For those with deep rhythmic and melodic intelligence.",
+        "skills": [
+            "Musical Ability",
+            "Rhythm & Timing",
+            "Instrument Proficiency",
+            "Improvisation"
+        ],
+        "related": [
+            "Music Producer",
+            "Sound Designer",
+            "Composer"
+        ],
+        "roadmap": [
+            {
+                "action": "Master Instrument",
+                "timeline": "Years"
+            },
+            {
+                "action": "Music Theory",
+                "timeline": "6-12 months"
+            },
+            {
+                "action": "Performance Experience",
+                "timeline": "Ongoing"
+            }
+        ],
+        "risk_factors": {
+            "income_instability": "High",
+            "competition": "Very High"
+        },
+        "tradeoffs": [
+            "Irregular hours",
+            "Audition rejection"
+        ],
+        "opportunity_cost": {
+            "description": "Passion-driven career with high variance.",
+            "gained_options": [
+                "Teaching",
+                "Audio Eng"
+            ],
+            "lost_options": [
+                "Corporate Roles"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Performance"
+        ]
+    },
+    {
+        "id": "singer",
+        "title": "Singer",
+        "category": "Arts",
+        "salary_range": "$30k - $100k+",
+        "growth_rate": "Variable",
+        "description": "Use the voice as an instrument to convey melody and emotion.",
+        "reasoning": "Requires vocal discipline and confidence.",
+        "skills": [
+            "Vocal Control",
+            "Pitch Accuracy",
+            "Stage Presence",
+            "Languages"
+        ],
+        "related": [
+            "Voice Artist",
+            "Performer"
+        ],
+        "roadmap": [
+            {
+                "action": "Vocal Training",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Performance",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Recording Demo",
+                "timeline": "3 months"
+            }
+        ],
+        "risk_factors": {
+            "health": "High (Vocal Strain)",
+            "competition": "Very High"
+        },
+        "tradeoffs": [
+            "Vocal health maintenance",
+            "Travel"
+        ],
+        "opportunity_cost": {
+            "description": "Unique skill set.",
+            "gained_options": [
+                "Voice Coach",
+                "Acting"
+            ],
+            "lost_options": [
+                "Desk Jobs"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Performance"
+        ]
+    },
+    {
+        "id": "dancer",
+        "title": "Dancer",
+        "category": "Arts",
+        "salary_range": "$25k - $80k",
+        "growth_rate": "+6%",
+        "description": "Express stories and emotions through movement and choreography.",
+        "reasoning": "Demands peak physical fitness and artistic expression.",
+        "skills": [
+            "Dance Technique",
+            "Body Movement",
+            "Rhythm & Timing",
+            "Teamwork"
+        ],
+        "related": [
+            "Choreographer",
+            "Performer",
+            "Dance Instructor"
+        ],
+        "roadmap": [
+            {
+                "action": "Technical Training",
+                "timeline": "Years"
+            },
+            {
+                "action": "Auditions",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Company Work",
+                "timeline": "Variable"
+            }
+        ],
+        "risk_factors": {
+            "injury": "High",
+            "career_span": "Short"
+        },
+        "tradeoffs": [
+            "Physical exhaustion",
+            "Short career"
+        ],
+        "opportunity_cost": {
+            "description": "Physical career.",
+            "gained_options": [
+                "Choreography",
+                "Fitness Training"
+            ],
+            "lost_options": [
+                "Sedentary Roles"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Performance",
+            "Physical"
+        ]
+    },
+    {
+        "id": "actor",
+        "title": "Actor",
+        "category": "Arts",
+        "salary_range": "Variable",
+        "growth_rate": "+4%",
+        "description": "Portray characters in theater, film, television, and other media.",
+        "reasoning": "For storytellers with high emotional intelligence.",
+        "skills": [
+            "Acting Skills",
+            "Emotional Expression",
+            "Improvisation",
+            "Script Reading"
+        ],
+        "related": [
+            "Theatre Artist",
+            "Voice Actor",
+            "Director"
+        ],
+        "roadmap": [
+            {
+                "action": "Acting Classes",
+                "timeline": "6-12 months"
+            },
+            {
+                "action": "Student Films",
+                "timeline": "1 year"
+            },
+            {
+                "action": "Agent Search",
+                "timeline": "Ongoing"
+            }
+        ],
+        "risk_factors": {
+            "rejection": "Very High",
+            "income_instability": "Very High"
+        },
+        "tradeoffs": [
+            "Unstable income",
+            "Public scrutiny"
+        ],
+        "opportunity_cost": {
+            "description": "Deep emotional work.",
+            "gained_options": [
+                "Directing",
+                "Teaching",
+                "Public Speaking"
+            ],
+            "lost_options": [
+                "Technical Roles"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Performance",
+            "Storytelling"
+        ]
+    },
+    {
+        "id": "visual-artist",
+        "title": "Visual Artist",
+        "category": "Arts",
+        "salary_range": "$40k - $90k",
+        "growth_rate": "+5%",
+        "description": "Create original works of art using various media.",
+        "reasoning": "Pure visual expression for creative minds.",
+        "skills": [
+            "Drawing",
+            "Painting",
+            "Color Theory",
+            "Visual Composition"
+        ],
+        "related": [
+            "Illustrator",
+            "Digital Artist",
+            "Concept Artist"
+        ],
+        "roadmap": [
+            {
+                "action": "Portfolio Building",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Exhibitions/Sales",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Style Development",
+                "timeline": "Years"
+            }
+        ],
+        "risk_factors": {
+            "income_instability": "Moderate",
+            "self_promotion": "High"
+        },
+        "tradeoffs": [
+            "Solitary work",
+            "Self-promotion heavy"
+        ],
+        "opportunity_cost": {
+            "description": "Focus on pure aesthetics.",
+            "gained_options": [
+                "Graphic Design",
+                "Art Direction"
+            ],
+            "lost_options": [
+                "Data Analysis"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Visual"
+        ]
+    },
+    {
+        "id": "filmmaker",
+        "title": "Filmmaker",
+        "category": "Arts",
+        "salary_range": "$50k - $120k",
+        "growth_rate": "+8%",
+        "description": "Direct and produce visual stories for screen.",
+        "reasoning": "Combines visual, narrative, and technical skills.",
+        "skills": [
+            "Storytelling",
+            "Camera Awareness",
+            "Visual Composition",
+            "Leadership"
+        ],
+        "related": [
+            "Director",
+            "Editor",
+            "Screenwriter"
+        ],
+        "roadmap": [
+            {
+                "action": "Short Films",
+                "timeline": "1-2 years"
+            },
+            {
+                "action": "Film Festivals",
+                "timeline": "Ongoing"
+            },
+            {
+                "action": "Feature Development",
+                "timeline": "Variable"
+            }
+        ],
+        "risk_factors": {
+            "funding": "High",
+            "long_hours": "High"
+        },
+        "tradeoffs": [
+            "Long production hours",
+            "Funding challenges"
+        ],
+        "opportunity_cost": {
+            "description": "Master storyteller.",
+            "gained_options": [
+                "Video Production",
+                "Advertising"
+            ],
+            "lost_options": [
+                "Routine Office Work"
+            ]
+        },
+        "tags": [
+            "Creative",
+            "Art",
+            "Storytelling"
+        ]
+    }
+]

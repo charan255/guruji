@@ -1,0 +1,152 @@
+[
+    {
+        "interests": [
+            "Creative Arts",
+            "Coding",
+            "Film"
+        ],
+        "skills": {
+            "coding": 4,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 5,
+            "arts": 5
+        },
+        "workStyle": {
+            "structure": 83,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "high",
+        "motivations": [
+            "money",
+            "fame"
+        ],
+        "id": "46228210-2063-4015-bd2e-d5d16a62edc8"
+    },
+    {
+        "interests": [
+            "Coding",
+            "Designing",
+            "Film"
+        ],
+        "skills": {
+            "coding": 5,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 5,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "deep",
+        "risk": "low",
+        "motivations": [
+            "fame",
+            "stability"
+        ],
+        "id": "183840e4-2e51-4a65-b667-2df9a28e7dde"
+    },
+    {
+        "interests": [
+            "Film",
+            "Coding"
+        ],
+        "skills": {
+            "coding": 5,
+            "data": 4,
+            "design": 3,
+            "business": 3,
+            "people": 5,
+            "arts": 5
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "deep",
+        "risk": "low",
+        "motivations": [
+            "stability",
+            "growth",
+            "money",
+            "fame"
+        ],
+        "id": "37809688-1806-450e-b740-676328ffa53c"
+    },
+    {
+        "interests": [
+            "Coding",
+            "Designing"
+        ],
+        "skills": {
+            "coding": 5,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 4,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "stability",
+            "growth"
+        ],
+        "id": "63de59c2-894f-4d8a-bcd8-b48f93e4817d"
+    },
+    {
+        "interests": [
+            "Psychology"
+        ],
+        "skills": {
+            "coding": 3,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 3,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "stability"
+        ],
+        "id": "36c200cb-13dc-473c-8c65-e17b91eaf0b3"
+    },
+    {
+        "interests": [
+            "Coding"
+        ],
+        "skills": {
+            "coding": 3,
+            "data": 3,
+            "design": 3,
+            "business": 3,
+            "people": 3,
+            "arts": 3
+        },
+        "workStyle": {
+            "structure": 50,
+            "pace": 50
+        },
+        "learning": "medium",
+        "risk": "medium",
+        "motivations": [
+            "fame"
+        ],
+        "id": "5061f4f3-c3e1-4a11-bda0-3de9a0297afe"
+    }
+]
